@@ -199,6 +199,7 @@
 		0F2C34B326B6ECA0003B5752 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TB;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					0F2C34BA26B6ECA0003B5752 = {
