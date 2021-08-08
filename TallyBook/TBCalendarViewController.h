@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TBCalendarViewController : UIViewController
 
+@property (nonatomic, strong) void(^didFinishDatePick)(BOOL cancel, NSDate * _Nullable date);
+
 @end
 
 NS_ASSUME_NONNULL_END
