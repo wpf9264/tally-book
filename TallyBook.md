@@ -10,12 +10,27 @@
 
 - 启动画面
 - nagivation bar
+- KVO
+- MVVM
+- MVC
+- schema
+  - 端内
+  - 端外
+- JSB
+  - h5
+  - lynx
+  - RN
+- OperationQueue
 - 数据存储：阅读现有的轮子
 - cocopods
+- podfile
 - 横竖屏切换：
 - 多 target
 - Extension
 - 网络请求：
+- 日志系统
+- 日历
+- 运行时 hook
 
 
 
@@ -62,4 +77,40 @@ Asset里面是各种图片资源，这里有默认的AppIcon，可以看到Apple
 直接将相应大小的icon拖入对应的位置即可，此时在桌面的icon，和xcode的icon均已经替换。注意：这里如果拖入尺寸错误的icon，会导致编译失败。可以看到我这里的icon是带有黑边的，这是因为我选择的png图片，且存在alpha通道，可以选择jpg的图片。
 
 ![image-20210801235444422](/Users/wangpengfei/Library/Application Support/typora-user-images/image-20210801235444422.png)
+
+### AppDelegate & SceneDelegate 联系
+
+[(47条消息) iOS 13 SceneDelegate适配_仰望星空的博客-CSDN博客](https://blog.csdn.net/weixin_38735568/article/details/101266408?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-4.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-4.base)
+
+这里暂时先不关注SceneDelegate的作用，适配 iOS 13 以下的设备。
+
+
+
+## 基础能力
+
+### 日历
+
+日历是一个基础能力，在各个地方都会用到，因此期望提供通用接口，支持选择日期，或者具体的时间点。
+
+
+
+### 导航栏
+
+
+
+### 宏定义
+
+屏幕宽度
+
+屏幕高度
+
+顶部安全距离
+
+底部安全距离
+
+机型判断
+
+
+
+
 
