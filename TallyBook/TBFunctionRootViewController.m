@@ -45,6 +45,18 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (void)test
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"xuanze" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIDatePicker *picker = [[UIDatePicker alloc] init];
+    picker.datePickerMode = UIDatePickerModeDateAndTime;
+    if (@available(iOS 13.4, *)) {
+        picker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    [alert.view addSubview:picker];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 - (UILabel *)dateLabel
 {

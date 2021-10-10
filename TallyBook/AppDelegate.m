@@ -14,8 +14,17 @@
 
 @implementation AppDelegate
 
+// 启动时的第一次机会来执行代码
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+    return YES;
+}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+// 应用启动并进行初始化时会调用该方法并发出通知 UIApplicationDidFinishLaunchingNotification。这个阶段会实例化根视图控制器
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
     // Override point for customization after application launch.
     self.mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     TBFunctionRootViewController *rootVC = [[TBFunctionRootViewController alloc] init];
@@ -25,6 +34,35 @@
     return YES;
 }
 
+// 应用进人前台并处于活动状态时调用该方法井发出通知 UIApplicationDidBecomeActiveNotification 这个阶段可以恢复UI的状态（例如游戏状态等）
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+}
+
+// 应用从活动状态进人到非活动状态时调用该方法并发出通知 UIApplicationWillResignActiveNotification。这个阶段可以保存U的状态（例如游戏状态等）
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+}
+
+//应用进人后台时调用该方法并发出通知。这个阶段可以保存用户数据，释放一些资源（例如释放数据库资源等）
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+}
+
+// 应用进人到前台，但是还没有处于活动状态时调用该方法井发出通知 UIApplicationWillEnterForegroundNotification。这个阶段可以恢复用户数据
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+}
+
+// 应用被终止时调用该方法井发出通知 UIApplicationWillTerminateNotification，但内存清除时除外。这个阶段释放一些资源，也可以保存用户数据
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    NSLog(@"current method:%@.", NSStringFromSelector(_cmd));
+}
 
 #pragma mark - UISceneSession lifecycle
 
