@@ -34,19 +34,6 @@
     [self.view addSubview:self.confirmBtn];
     [self.view addSubview:self.datePicker];
     self.datePicker.center = self.view.center;
-    
-    
-    self.cancelBtn.translatesAutoresizingMaskIntoConstraints = NO;
-
-    NSLayoutConstraint *xCancel = [NSLayoutConstraint constraintWithItem:self.cancelBtn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:50];
-    NSLayoutConstraint *yCancel = [NSLayoutConstraint constraintWithItem:self.cancelBtn attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:50];
-    [self.view addConstraints:@[xCancel,yCancel]];
-    
-    self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *xPicker = [NSLayoutConstraint constraintWithItem:self.datePicker attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.cancelBtn attribute:NSLayoutAttributeBottom multiplier:1 constant:50];
-    NSLayoutConstraint *yPicker = [NSLayoutConstraint constraintWithItem:self.datePicker attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:50];
-    
-    [self.view addConstraints:@[xPicker, yPicker]];
 }
 
 #pragma mark - actions
@@ -75,7 +62,7 @@
 - (UIButton *)cancelBtn
 {
     if (!_cancelBtn) {
-        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 200, 100, 40)];
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_cancelBtn addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
@@ -86,7 +73,7 @@
 - (UIButton *)confirmBtn
 {
     if (!_confirmBtn) {
-        _confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+        _confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 40)];
         [_confirmBtn setTitle:@"确认" forState:UIControlStateNormal];
         [_confirmBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _confirmBtn.titleLabel.textColor = [UIColor blackColor];// 为什么不生效
@@ -106,7 +93,7 @@
         if (@available(iOS 13.4, *)) {
             _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
         }
-        SEL  selector =  NSSelectorFromString (@"setHighlightsToday:");
+        SEL selector =  NSSelectorFromString (@"setHighlightsToday:");
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDatePicker instanceMethodSignatureForSelector:selector]];
         BOOL no = NO;
         [invocation setSelector:selector];
@@ -116,16 +103,27 @@
         unsigned int propertyCount;
         objc_property_t *propertyList = class_copyPropertyList([UIDatePicker class], &propertyCount);
         for (int index = 0; index < propertyCount; index++) {
-            NSString *getPropertyName = [NSString stringWithCString:property_getName(propertyList[index]) encoding:NSUTF8StringEncoding];
-            NSString *getPropertyNameString = [NSString stringWithCString:property_getAttributes(propertyList[index]) encoding:NSUTF8StringEncoding];
-            if([getPropertyName isEqualToString:@"textColor"]) {
-                [_datePicker setValue:[UIColor blackColor] forKey:@"textColor"];
+            NSString *name = [NSString stringWithCString:property_getName(propertyList[index]) encoding:NSUTF8StringEncoding];
+            NSString *attributes = [NSString stringWithCString:property_getAttributes(propertyList[index]) encoding:NSUTF8StringEncoding];
+            if([name isEqualToString:@"textColor"]) {
+                [_datePicker setValue:[UIColor yellowColor] forKey:@"textColor"];
             }
-            if([getPropertyName isEqualToString:@"highlightColor"]) {
-                [_datePicker setValue:[UIColor blackColor] forKey:@"highlightColor"];
+            if([name isEqualToString:@"highlightColor"]) {
+                [_datePicker setValue:[UIColor greenColor] forKey:@"highlightColor"];
             }
-//            NSLog(@"%@====%@",getPropertyNameString,getPropertyName);
+            if([name isEqualToString:@"textShadowColor"]) {
+                [_datePicker setValue:[UIColor redColor] forKey:@"textShadowColor"];
+            }
+//            NSLog(@"name:%@ ==== attributes:%@",name, attributes);
         }
+        
+        unsigned int methodCount;
+        Method *methodList = class_copyMethodList(UIDatePicker.class, &methodCount);
+        for (int index = 0; index < methodCount; index++) {
+            NSString *name = [NSString stringWithCString:method_getName(methodList[index]) encoding:NSUTF8StringEncoding];
+//            NSLog(@"name:%@",name);
+        }
+        
     }
     return _datePicker;
 }
